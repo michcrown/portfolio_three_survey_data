@@ -25,7 +25,6 @@ def analyze_survey_data(data):
     print("Mode: ", mode)
     print("Standard Deviation: ", std_dev)
     
-   
     plt.hist(data)
     plt.show()
     
@@ -33,4 +32,7 @@ def analyze_survey_data(data):
     print(key_findings)
     return key_findings
 
-
+# write the data to a CSV file using pandas
+def export_results(data, file_path):
+    data.to_csv(file_path, index=False)
+    print("Results exported successfully to", file_path)
