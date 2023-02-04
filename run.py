@@ -1,3 +1,16 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+pip install pandas
+pip install numpy
+pip install matplotlib
+
+# function to read the data from the file
+def import_survey_results(file_path):
+
+    data = pd.read_csv(file_path)
+    return data
+
+
+
