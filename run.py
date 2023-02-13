@@ -1,49 +1,45 @@
-import pandas as pd
+# importing
 import numpy as np
 import matplotlib.pyplot as plt
 
-pip install pandas
-pip install numpy
-pip install matplotlib
+def get_records(filename):
+    """
+        read the file and save all the records in a list.
+        the list is a list of dictionaries.
+    """
 
-# function to read the data from the file - 1
-def import_survey_results(file_path):
+    # list
+    records = []
 
-    data = pd.read_csv(file_path)
-    return data
+    # open the file
+    file = open(filename, "r")
+     # read lines
+    lines = file.readlines()
 
-# function to analyse survey data in a basic way - 2
-# will need more detail - maybe on what information this parses? 
-def analyze_survey_data(data):
-   
-    mean = np.mean(data)
-    median = np.median(data)
-    mode = stats.mode(data)
-    std_dev = np.std(data)
-   
-    print("Mean: ", mean)
-    print("Median: ", median)
-    print("Mode: ", mode)
-    print("Standard Deviation: ", std_dev)
+    # get all the lines to the list
+    for line in lines:
+        line = line.strip()
+        fields = line.split(",")
+        records.append(fields)
+
+    records = records[1:]
+  temp = []
+    # make all the lines according to the below dictionary
+    for record in records:
+        my_dict = {
+            "id": record[0],
+            "crime": record[1],
+            "number": record[2],
+            "date": record[3],
+            "location": record[4],
+            "beat": record[5],
+            "neighborhood": record[6],
+            "npu": record[7],
+            "lat": record[8],
+            "long": record[9]
+        }
+
+        temp.append(my_dict)
+
+    records = temp
     
-    plt.hist(data)
-    plt.show()
-    
-    key_findings = "The survey results show a mean of {} with a median of {} and a mode of {}. The standard deviation is {}.".format(mean, median, mode, std_dev)
-    print(key_findings)
-    return key_findings
-
-# write the data to a CSV file using pandas - 3
-# maybe will need to be able "appropriate file" - maybe need PDF's too?
-def export_results(data, file_path):
-    data.to_csv(file_path, index=False)
-    print("Results exported successfully to", file_path)
-
-
-
-
-###The application should provide actionable insights from an inputted dataset. - actionable?
-
-###Import survey results from the terminal, structured data file or similar. - function 1
-###Parse and analyse the data - function 2
-###Export the results to an appropriate file - function 3
