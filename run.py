@@ -23,6 +23,7 @@ def get_records(filename):
         line = line.strip()
         fields = line.split(",")
         records.append(fields)
+
     records = records[1:]
 
     temp = []
@@ -80,7 +81,8 @@ def print_record(record):
           "Number :", record["number"], "Date :", record["date"], end="")
     print("Location :", record["location"], "Beat :", record["beat"],
           "Neighborhood :", record["neighborhood"], "Npu :", record["npu"], "Latitude :", record["lat"], "Longitude :", record["long"])
-  
+
+
 def get_total_records(records):
     """
         printing the total number of records in the file
@@ -95,6 +97,8 @@ def print_all_records(records):
 
     for record in records:
         print(record)
+
+
 def get_record_by_number(records):
     """
         print the record related to a user inputted number
@@ -113,6 +117,7 @@ def get_record_by_number(records):
             return
 
     print("No matched numbers! Please check again!!")
+
 
 def get_records_by_date(records):
     """
@@ -147,6 +152,8 @@ def get_records_by_date(records):
 
         else:
             print("Invalid input!")
+
+
 def get_records_related_to_npu(records):
     """
         Get all the records related to a user inputted NPU.
@@ -178,4 +185,111 @@ def get_records_related_to_npu(records):
 
         else:
             print("Invalid input!")
-            
+
+
+def get_number_of_records_related_to_crime_type(records):
+    """
+        Get number of related cases for a type of crime
+    """
+
+    my_dict = {}
+
+    # save the number of crimes for each type
+    for record in records:
+        if record["crime"] not in my_dict:
+            my_dict[record["crime"]] = 1
+
+        else:
+            my_dict[record["crime"]] += 1
+
+    for key in my_dict:
+        print(key, ":", my_dict[key])
+
+
+def get_records_in_a_location(records):
+    """
+        Get all the records related to a location.
+    """
+
+    location = input("Enter the location : ")
+
+    matched_list = []
+
+    for record in records:
+        if location.upper() in record["location"]:
+            matched_list.append(record)
+
+    if len(matched_list) == 0:
+        print("There are no any matching! Please check the location again!")
+
+    else:
+        print("There are ", len(matched_list), "number of potential records")
+        confirm = input("Do you want to view all of them? (Y/N) : ")
+
+        if confirm.upper() == "Y":
+            for record in matched_list:
+                print_record(record)
+
+        elif confirm.upper() == "N":
+            return
+
+        else:
+            print("Invalid input!")
+
+
+def get_bar_plot(records):
+    """
+        Generate bar plot for each crime type
+    """
+
+    my_dict = {}
+
+    for record in records:
+        if record["crime"] not in my_dict:
+            my_dict[record["crime"]] = 1
+
+        else:
+            my_dict[record["crime"]] += 1
+
+    for key in my_dict:
+        print(key, ":", my_dict[key])
+
+    crime_types = list(my_dict.keys())
+    crime_values = list(my_dict.values())
+
+    # plot the bar plot
+    plt.bar(crime_types, crime_values, color="r")
+    plt.xticks(rotation=45, ha='right')
+
+    plt.show()
+
+
+def get_records_by_latitude(records):
+    """
+        Get the records with  in a latitude
+    """
+    latitude = input("Enter the latitude : ")
+
+    matched_list = []
+
+    for record in records:
+        if float(latitude)+0.000001 >= float(record["lat"]) and float(latitude)-0.000001 <= float(record["lat"]):
+            matched_list.append(record)
+
+    if len(matched_list) == 0:
+        print("There are no any matching! Please check the latitude again!")
+
+    else:
+        print("There are ", len(matched_list), "number of potential records")
+        confirm = input("Do you want to view all of them? (Y/N) : ")
+
+        if confirm.upper() == "Y":
+            for record in matched_list:
+                print_record(record)
+
+        elif confirm.upper() == "N":
+            return
+
+        else:
+            print("Invalid input!")
+
