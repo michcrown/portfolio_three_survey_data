@@ -292,4 +292,33 @@ def get_records_by_latitude(records):
 
         else:
             print("Invalid input!")
+def get_records_by_longitude(records):
+    """
+        Get the records with  in a longitude
+    """
+    longitude = input("Enter the latitude : ")
+
+    matched_list = []
+
+    for record in records:
+        if float(longitude)+0.000001 >= float(record["long"]) and float(longitude)-0.000001 <= float(record["long"]):
+            matched_list.append(record)
+
+    if len(matched_list) == 0:
+        print("There are no any matching! Please check the longitude again!")
+
+    else:
+        print("There are ", len(matched_list), "number of potential records")
+        confirm = input("Do you want to view all of them? (Y/N) : ")
+
+        if confirm.upper() == "Y":
+            for record in matched_list:
+                print_record(record)
+
+        elif confirm.upper() == "N":
+            return
+
+        else:
+            print("Invalid input!")
+
 
