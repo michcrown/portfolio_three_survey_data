@@ -292,6 +292,8 @@ def get_records_by_latitude(records):
 
         else:
             print("Invalid input!")
+
+
 def get_records_by_longitude(records):
     """
         Get the records with  in a longitude
@@ -322,3 +324,72 @@ def get_records_by_longitude(records):
             print("Invalid input!")
 
 
+def exit():
+    """
+        Message to be printed when exiting
+    """
+    print("Exiting...")
+
+
+def invalid_input():
+    """
+        Message to be printed when the user enters invalid input
+    """
+    print("Invalid user input! Please try again!")
+
+
+def run_program():
+
+    # read the filename
+    filename = input("Enter the filename : ")
+
+    # read all the records
+    records = get_records(filename)
+
+    # run the menu until user exits
+    while True:
+        # print the menu
+        user_input = menu()
+
+        # deal with each case
+        if (user_input == "1"):
+            get_total_records(records)
+
+        elif (user_input == "2"):
+            print_all_records(records)
+
+        elif (user_input == "3"):
+            get_record_by_number(records)
+
+        elif (user_input == "4"):
+            get_records_by_date(records)
+
+        elif (user_input == "5"):
+            get_records_related_to_npu(records)
+
+        elif (user_input == "6"):
+            get_number_of_records_related_to_crime_type(records)
+
+        elif (user_input == "7"):
+            get_records_in_a_location(records)
+
+        elif (user_input == "8"):
+            get_bar_plot(records)
+
+        elif (user_input == "9"):
+            get_records_by_latitude(records)
+
+        elif (user_input == "10"):
+            get_records_by_longitude(records)
+
+        elif (user_input == "11"):
+            exit()
+            break
+
+        else:
+            invalid_input()
+
+
+if __name__ == "__main__":
+    # run the program
+    run_program()
