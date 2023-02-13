@@ -114,3 +114,36 @@ def get_record_by_number(records):
 
     print("No matched numbers! Please check again!!")
 
+def get_records_by_date(records):
+    """
+        Get all the records that has happned in a user inputted date.
+    """
+
+    # get the date from the user
+    date = input("Enter the date (MM/DD/YYYY) : ")
+
+    matched_list = []
+
+    # check with every record
+    for record in records:
+        if record["date"] == date:
+            matched_list.append(record)
+
+    # if no matched record found
+    if len(matched_list) == 0:
+        print("There are no any matching! Please check the date again!")
+
+    # print it
+    else:
+        print("There are ", len(matched_list), "number of records")
+        confirm = input("Do you want to view all of them? (Y/N) : ")
+
+        if confirm.upper() == "Y":
+            for record in matched_list:
+                print_record(record)
+
+        elif confirm.upper() == "N":
+            return
+
+        else:
+            print("Invalid input!")
