@@ -147,3 +147,35 @@ def get_records_by_date(records):
 
         else:
             print("Invalid input!")
+def get_records_related_to_npu(records):
+    """
+        Get all the records related to a user inputted NPU.
+    """
+
+    npu = input("Enter NPU (Neighboured Police Unit) : ")
+
+    matched_list = []
+
+    # check with every record
+    for record in records:
+        if record["npu"] == npu:
+            matched_list.append(record)
+
+    # if no matched record found
+    if len(matched_list) == 0:
+        print("There are no any matching! Please check the npu again!")
+
+    else:
+        print("There are ", len(matched_list), "number of records")
+        confirm = input("Do you want to view all of them? (Y/N) : ")
+
+        if confirm.upper() == "Y":
+            for record in matched_list:
+                print_record(record)
+
+        elif confirm.upper() == "N":
+            return
+
+        else:
+            print("Invalid input!")
+            
