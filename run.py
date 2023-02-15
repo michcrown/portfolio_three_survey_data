@@ -2,7 +2,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def get_records(filename):
     """
         read the file and save all the records in a list.
@@ -12,7 +11,7 @@ def get_records(filename):
     # list
     records = []
 
-    # open the file
+    # open the file 
     file = open(filename, "r")
 
     # read lines
@@ -341,7 +340,7 @@ def invalid_input():
 def run_program():
 
     # read the filename
-    filename = input("Enter the filename : ")
+    filename = input("Enter the filename :\n ")
 
     # read all the records
     records = get_records(filename)
