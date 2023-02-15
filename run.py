@@ -12,7 +12,7 @@ def get_records(filename):
     records = []
 
     # open the file 
-    file = open(filename, "r")
+    file = open('altcrime.csv', "r")
 
     # read lines
     lines = file.readlines()
