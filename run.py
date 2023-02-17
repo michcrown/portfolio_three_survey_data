@@ -1,32 +1,17 @@
 # importing
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
-def get_records(filename):
-    """
-        read the file and save all the records in a list.
-        the list is a list of dictionaries.
-    """
-
-    # list
-    records = []
-
-    # open the file 
-    file = open('altcrime.csv', "r")
-
-    # read lines
-    lines = file.readlines()
-
-    # get all the lines to the list
-    for line in lines:
-        line = line.strip()
-        fields = line.split(",")
-        records.append(fields)
-
+def get_records(url):
+    df = pd.read_csv(url)
+    # Process the data in the DataFrame as needed
+    # ...
+    records = df.values.tolist()
     records = records[1:]
 
     temp = []
-    # make all the lines according to the below dictionary
+    # Make all the lines according to the below dictionary
     for record in records:
         my_dict = {
             "id": record[0],
@@ -40,13 +25,17 @@ def get_records(filename):
             "lat": record[8],
             "long": record[9]
         }
-
         temp.append(my_dict)
 
-    records = temp
+    # Return the list of records
+    return temp
 
-    # return the list of records
-    return records
+url = 'https://raw.githubusercontent.com/michcrown/portfolio_three_survey_data/main/assets/atlcrime.csv'
+records = get_records(url)
+
+
+# call the get_records() function 
+
 
 
 def menu():
